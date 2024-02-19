@@ -21,6 +21,12 @@ dependencies = [
     "requests~=2.31.0",
 ]
 
+[project.optional-dependencies]
+"dev" = [
+    "Faker~=23.2.1",
+    "python-dotenv~=1.0.1",
+]
+
 [project.urls]
 "Homepage" = "https://github.com/GrawRadiosondes/sounding-center-python-api"
 "Bug Tracker" = "https://github.com/GrawRadiosondes/sounding-center-python-api/issues"

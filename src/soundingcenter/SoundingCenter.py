@@ -39,7 +39,7 @@ class Api:
         return request
 
     def user(self):
-        return self.get('user')
+        return self.get('user/self')
 
     def create_user(self, email: str, password: str, role: str, name: str):
         return self.post('user', {
