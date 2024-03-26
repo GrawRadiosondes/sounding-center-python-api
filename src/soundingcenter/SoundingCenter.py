@@ -49,11 +49,22 @@ class Api:
             'name': name,
         })
 
-    def create_station(self, name: str, station_type: str, wmo_id: int):
+    def create_station(
+            self,
+            name: str,
+            station_type: str,
+            wmo_id: int,
+            latitude: float,
+            longitude: float,
+            altitude: float
+    ):
         return self.post('station', {
             'name': name,
             'type': station_type,
-            'wmo_id': wmo_id
+            'wmo_id': wmo_id,
+            'latitude': latitude,
+            'longitude': longitude,
+            'altitude': altitude,
         })
 
     def attach_station_to_user(self, user_id: int, station_id: int):

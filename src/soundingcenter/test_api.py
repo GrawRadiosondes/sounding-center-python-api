@@ -31,12 +31,18 @@ class TestApi(unittest.TestCase):
         self.assertEqual(response.status_code, codes.created)
 
     def test_create_station(self):
-        response = self.api.create_station(self.fake.name(), 'operated_fixed', self.fake.random_int(10000, 99999))
+        response = self.api.create_station(
+            self.fake.name(), 'operated_fixed', self.fake.random_int(10000, 99999),
+            float(self.fake.latitude()), float(self.fake.longitude()), self.fake.random_int(min=0, max=8848)
+        )
         self.assertEqual(response.status_code, codes.created)
 
     def test_attach_station_to_user(self):
         user = self.api.create_user(self.fake.email(), self.fake.password(), 'user', self.fake.name()).json()
-        station = self.api.create_station(self.fake.name(), 'operated_fixed', self.fake.random_int(10000, 99999)).json()
+        station = self.api.create_station(
+            self.fake.name(), 'operated_fixed', self.fake.random_int(10000, 99999),
+            float(self.fake.latitude()), float(self.fake.longitude()), self.fake.random_int(min=0, max=8848)
+        ).json()
         response = self.api.attach_station_to_user(user['data']['id'], station['data']['id'])
         self.assertEqual(response.status_code, 200)
 
