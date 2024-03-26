@@ -6,4 +6,4 @@
 2. Bump Version in [pyproject.toml](pyproject.toml)
 3. `python -m build`
 4. `python -m twine upload dist/*`
-5. (optional) `rm dist/*`
+5. (optional) `rm -r dist`
