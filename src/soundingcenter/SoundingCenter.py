@@ -52,7 +52,7 @@ class Api:
     def create_station(
             self,
             name: str,
-            station_type: str,
+            type: str,
             wmo_id: int,
             latitude: float,
             longitude: float,
@@ -60,7 +60,7 @@ class Api:
     ):
         return self.post('station', {
             'name': name,
-            'type': station_type,
+            'type': type,
             'wmo_id': wmo_id,
             'latitude': latitude,
             'longitude': longitude,
