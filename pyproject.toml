@@ -23,7 +23,7 @@ dependencies = [
 
 [project.optional-dependencies]
 "dev" = [
-    "Faker>=26.0.0,<26.3",
+    "Faker>=26.0.0,<27.1",
     "python-dotenv~=1.0.1",
 ]
 
