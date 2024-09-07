@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68.2.2"]
+requires = ["setuptools>=74.1.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,7 +7,7 @@ name = "soundingcenter"
 version = "1.1.0"
 description = "A python lib to use the sounding center api"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [
     { name = "Niklas Wildenburg", email = "niklas.wildenburg@graw.de" },
@@ -18,12 +18,12 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "requests>=2.31,<2.33",
+    "requests>=2.32.3",
 ]
 
 [project.optional-dependencies]
 "dev" = [
-    "Faker>=26.0.0,<28.2",
+    "Faker>=28.1.0",
     "python-dotenv~=1.0.1",
 ]
 
