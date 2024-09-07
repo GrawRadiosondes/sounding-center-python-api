@@ -9,12 +9,18 @@ class Api:
         self.auth = (username, password)
         self.logging = logging
 
-    def log(self, response: Response):
+    def log(self, value):
+        if self.logging:
+            print(value)
+
+    def log_response(self, response: Response):
         if self.logging and not response.ok:
             print(response.status_code)
             print(response.content)
 
     def get(self, path: str):
+        self.log(f"GET {self.base_url}/{path}")
+
         request = get(
             url=f"{self.base_url}/{path}",
             headers={
@@ -23,10 +29,12 @@ class Api:
             auth=self.auth,
         )
 
-        self.log(request)
+        self.log_response(request)
         return request
 
     def post(self, path: str, json):
+        self.log(f"POST {self.base_url}/{path} {json}")
+
         request = post(
             url=f"{self.base_url}/{path}",
             headers={"Accept": "application/json", "Content-Type": "application/json"},
@@ -34,7 +42,7 @@ class Api:
             json=json,
         )
 
-        self.log(request)
+        self.log_response(request)
         return request
 
     def user(self):
