@@ -2,7 +2,9 @@ from requests import Response, get, post
 
 
 class Api:
-    def __init__(self, base_url: str, username: str, password: str, logging: bool = False):
+    def __init__(
+        self, base_url: str, username: str, password: str, logging: bool = False
+    ):
         self.base_url = base_url
         self.auth = (username, password)
         self.logging = logging
@@ -14,9 +16,9 @@ class Api:
 
     def get(self, path: str):
         request = get(
-            url=f'{self.base_url}/{path}',
+            url=f"{self.base_url}/{path}",
             headers={
-                'Accept': 'application/json',
+                "Accept": "application/json",
             },
             auth=self.auth,
         )
@@ -26,11 +28,8 @@ class Api:
 
     def post(self, path: str, json):
         request = post(
-            url=f'{self.base_url}/{path}',
-            headers={
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            url=f"{self.base_url}/{path}",
+            headers={"Accept": "application/json", "Content-Type": "application/json"},
             auth=self.auth,
             json=json,
         )
@@ -39,33 +38,39 @@ class Api:
         return request
 
     def user(self):
-        return self.get('user/self')
+        return self.get("user/self")
 
     def create_user(self, email: str, password: str, role: str, name: str):
-        return self.post('user', {
-            'email': email,
-            'password': password,
-            'role': role,
-            'name': name,
-        })
+        return self.post(
+            "user",
+            {
+                "email": email,
+                "password": password,
+                "role": role,
+                "name": name,
+            },
+        )
 
     def create_station(
-            self,
-            name: str,
-            type: str,
-            wmo_id: int,
-            latitude: float,
-            longitude: float,
-            altitude: float
+        self,
+        name: str,
+        operation_type: str,
+        wmo_id: int,
+        latitude: float,
+        longitude: float,
+        altitude: float,
     ):
-        return self.post('station', {
-            'name': name,
-            'type': type,
-            'wmo_id': wmo_id,
-            'latitude': latitude,
-            'longitude': longitude,
-            'altitude': altitude,
-        })
+        return self.post(
+            "station",
+            {
+                "name": name,
+                "type": operation_type,
+                "wmo_id": wmo_id,
+                "latitude": latitude,
+                "longitude": longitude,
+                "altitude": altitude,
+            },
+        )
 
     def attach_station_to_user(self, user_id: int, station_id: int):
-        return self.post(f'user/{user_id}/attachStation/{station_id}', {})
+        return self.post(f"user/{user_id}/attachStation/{station_id}", {})
