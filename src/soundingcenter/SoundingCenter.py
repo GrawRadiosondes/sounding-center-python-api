@@ -11,6 +11,8 @@ class Api:
 
     def log(self, value):
         if self.logging:
+            if isinstance(value, dict) and "password" in value:
+                value = {**value, "password": "[REDACTED]"}
             print(value)
 
     def log_response(self, response: Response):
@@ -33,7 +35,10 @@ class Api:
         return request
 
     def post(self, path: str, json):
-        self.log(f"POST {self.base_url}/{path} {json}")
+        sanitized_json = {**json}
+        if "password" in sanitized_json:
+            sanitized_json["password"] = "[REDACTED]"
+        self.log(f"POST {self.base_url}/{path} {sanitized_json}")
 
         request = post(
             url=f"{self.base_url}/{path}",
