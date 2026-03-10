@@ -21,7 +21,9 @@ class Api:
             print(response.content)
 
     def get(self, path: str):
-        self.log(f"GET {self.base_url}/{path}")
+        self.log(
+            f"GET {self.base_url}/{path}",
+        )
 
         request = get(
             url=f"{self.base_url}/{path}",

@@ -1,6 +1,6 @@
 import unittest
 from os import getenv
-from os.path import isfile, dirname, join
+from os.path import dirname, isfile, join
 
 from dotenv import load_dotenv
 from faker import Faker
