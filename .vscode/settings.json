@@ -1,0 +1,37 @@
+{
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports": "explicit",
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff",
+  },
+  "editor.autoClosingBrackets": "always",
+  "editor.fontFamily": "'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace",
+  "editor.formatOnSave": true,
+  "editor.selectionClipboard": false,
+  "files.autoSave": "onFocusChange",
+  "git.followTagsWhenSync": true,
+  "python.analysis.autoFormatStrings": true,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.completeFunctionParens": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.generateWithTypeAnnotation": true,
+  "python.analysis.inlayHints.callArgumentNames": "all",
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.pytestParameters": true,
+  "python.analysis.inlayHints.variableTypes": true,
+  "python.analysis.typeCheckingMode": "strict",
+  "python.analysis.typeEvaluation.deprecateTypingAliases": true,
+  "python.analysis.typeEvaluation.enableReachabilityAnalysis": true,
+  "python.defaultInterpreterPath": "/app/.venv/bin/python",
+  "remote.autoForwardPorts": false,
+  "terminal.integrated.scrollback": 100000,
+  "VsCodeTaskButtons.showCounter": false,
+  "VsCodeTaskButtons.tasks": [
+    {
+      "label": "$(play) test_api",
+      "task": "test_api",
+    },
+  ],
+}

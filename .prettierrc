@@ -1,0 +1,14 @@
+{
+    "trailingComma": "all",
+    "overrides": [
+        {
+            "files": [
+                ".vscode/*.json",
+                "devcontainer.json"
+            ],
+            "options": {
+                "parser": "jsonc"
+            }
+        }
+    ]
+}

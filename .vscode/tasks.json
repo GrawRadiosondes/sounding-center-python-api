@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "test_api",
+      "type": "shell",
+      "command": "uv run src/soundingcenter/test_api.py",
+      "presentation": {
+        "clear": true,
+      },
+    },
+  ],
+}

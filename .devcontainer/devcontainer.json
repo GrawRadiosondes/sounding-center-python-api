@@ -1,0 +1,35 @@
+{
+  "name": "sounding-center-python-api",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "options": ["--ssh", "default"],
+  },
+  "runArgs": ["--network=host", "--memory=8g", "--memory-swap=8g"],
+  "mounts": [
+    "type=bind,readonly,source=${localEnv:HOME}/.ssh,target=/root/.ssh",
+    "type=bind,readonly,source=${localEnv:HOME}/Library/Application Support/mkcert/rootCA.pem,target=/usr/local/certs/rootCA.pem",
+  ],
+  "containerEnv": {
+    "REQUESTS_CA_BUNDLE": "/usr/local/certs/rootCA.pem",
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "charliermarsh.ruff",
+        "docker.docker",
+        "esbenp.prettier-vscode",
+        "fill-labs.dependi",
+        "flyfly6.terminal-in-status-bar",
+        "github.copilot-chat",
+        "github.copilot",
+        "github.vscode-github-actions",
+        "ms-python.python",
+        "spencerwmiles.vscode-task-buttons",
+        "tamasfe.even-better-toml",
+        "tekumara.typos-vscode",
+        "Tyriar.sort-lines",
+      ],
+    },
+  },
+}

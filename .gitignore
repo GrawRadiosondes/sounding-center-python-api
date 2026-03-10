@@ -1,3 +1,11 @@
+.env
+
+# IDE
+.idea/misc.xml
+
+# Builds
+build/
 dist/
 *.egg-info
-.env
+*.whl
+*.tar
