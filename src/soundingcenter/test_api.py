@@ -20,9 +20,9 @@ class TestApi(unittest.TestCase):
         load_dotenv(env_file)
 
         self.api = Api(
-            getenv("SC_API_URL"),
-            getenv("SC_ADMIN_USERNAME"),
-            getenv("SC_ADMIN_PASSWORD"),
+            getenv("SC_API_URL") or "https://localhost/api",
+            getenv("SC_ADMIN_USERNAME") or "admin@domain.tld",
+            getenv("SC_ADMIN_PASSWORD") or "password",
             True,
         )
         self.fake = Faker()
