@@ -2,9 +2,8 @@
 
 ## Release
 
-1. (once) `uv pip install pip build twine`
-2. Bump Version in [pyproject.toml](pyproject.toml)
-3. `ruff format`
-4. `uv build`
-5. `python -m twine upload dist/*`
-6. (optional) `rm -r dist`
+1. Bump version in [pyproject.toml](pyproject.toml)
+2. `ruff format`
+3. Commit
+4. Apply SemVer tag
+5. Push commit and tag
