@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-and-publish:
-    runs-on: ephemeral-runners
+    runs-on: ubuntu-latest
     environment:
       name: pypi
       url: https://pypi.org/p/soundingcenter
