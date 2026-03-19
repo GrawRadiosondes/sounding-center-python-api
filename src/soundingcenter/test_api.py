@@ -1,11 +1,11 @@
 import unittest
+from logging import warning
 from os import getenv
 from os.path import dirname, isfile, join
 
 from dotenv import load_dotenv
 from faker import Faker
 from requests import codes
-
 from SoundingCenter import Api
 
 
@@ -14,7 +14,7 @@ class TestApi(unittest.TestCase):
         env_file = join(dirname(__file__), "../../.env")
 
         if not isfile(env_file):
-            print("script can not start because .env file is missing")
+            warning("script can not start because .env file is missing")
             exit(1)
 
         load_dotenv(env_file)
