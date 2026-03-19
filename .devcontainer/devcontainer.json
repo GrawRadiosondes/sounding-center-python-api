@@ -11,7 +11,7 @@
     //"type=bind,readonly,source=${localEnv:HOME}/Library/Application Support/mkcert/rootCA.pem,target=/usr/local/certs/rootCA.pem",
   ],
   "containerEnv": {
-    "REQUESTS_CA_BUNDLE": "/usr/local/certs/rootCA.pem",
+    //"REQUESTS_CA_BUNDLE": "/usr/local/certs/rootCA.pem",
   },
   "customizations": {
     "vscode": {
