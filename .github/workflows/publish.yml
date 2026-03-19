@@ -1,0 +1,20 @@
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+jobs:
+  build-and-publish:
+    runs-on: ephemeral-runners
+    environment:
+      name: pypi
+      url: https://pypi.org/p/soundingcenter
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+      - run: uvx ruff format --check
+      - run: uv build
+      - uses: pypa/gh-action-pypi-publish@release/v1
