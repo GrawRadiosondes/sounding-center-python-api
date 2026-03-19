@@ -1,31 +1,33 @@
+from logging import info
+from typing import Any
+
 from requests import Response, get, post
 
 
 class Api:
     def __init__(
         self, base_url: str, username: str, password: str, logging: bool = False
-    ):
-        self.base_url = base_url
-        self.auth = (username, password)
-        self.logging = logging
+    ) -> None:
+        self.base_url: str = base_url
+        self.auth: tuple[str, str] = (username, password)
+        self.logging: bool = logging
 
-    def log(self, value):
+    def log(self, message: str | dict[str, Any]) -> None:
         if self.logging:
-            if isinstance(value, dict) and "password" in value:
-                value = {**value, "password": "[REDACTED]"}
-            print(value)
+            if isinstance(message, dict) and "password" in message:
+                message = {**message, "password": "[REDACTED]"}
 
-    def log_response(self, response: Response):
+            info(msg=message)
+
+    def log_response(self, response: Response) -> None:
         if self.logging and not response.ok:
-            print(response.status_code)
-            print(response.content)
+            info(msg=response.status_code)
+            info(msg=response.content)
 
-    def get(self, path: str):
-        self.log(
-            f"GET {self.base_url}/{path}",
-        )
+    def get(self, path: str) -> Response:
+        self.log(message=f"GET {self.base_url}/{path}")
 
-        request = get(
+        response: Response = get(
             url=f"{self.base_url}/{path}",
             headers={
                 "Accept": "application/json",
@@ -33,32 +35,32 @@ class Api:
             auth=self.auth,
         )
 
-        self.log_response(request)
-        return request
+        self.log_response(response=response)
+        return response
 
-    def post(self, path: str, json):
-        sanitized_json = {**json}
+    def post(self, path: str, json: dict[str, Any]) -> Response:
+        sanitized_json: dict[str, Any] = {**json}
         if "password" in sanitized_json:
             sanitized_json["password"] = "[REDACTED]"
-        self.log(f"POST {self.base_url}/{path} {sanitized_json}")
+        self.log(message=f"POST {self.base_url}/{path} {sanitized_json}")
 
-        request = post(
+        response: Response = post(
             url=f"{self.base_url}/{path}",
             headers={"Accept": "application/json", "Content-Type": "application/json"},
             auth=self.auth,
             json=json,
         )
 
-        self.log_response(request)
-        return request
+        self.log_response(response=response)
+        return response
 
-    def user(self):
-        return self.get("user/self")
+    def user(self) -> Response:
+        return self.get(path="user/self")
 
-    def create_user(self, email: str, password: str, role: str, name: str):
+    def create_user(self, email: str, password: str, role: str, name: str) -> Response:
         return self.post(
-            "user",
-            {
+            path="user",
+            json={
                 "email": email,
                 "password": password,
                 "role": role,
@@ -74,10 +76,10 @@ class Api:
         latitude: float,
         longitude: float,
         altitude: float,
-    ):
+    ) -> Response:
         return self.post(
-            "station",
-            {
+            path="station",
+            json={
                 "name": name,
                 "type": operation_type,
                 "wmo_id": wmo_id,
@@ -87,5 +89,5 @@ class Api:
             },
         )
 
-    def attach_station_to_user(self, user_id: int, station_id: int):
-        return self.post(f"user/{user_id}/attachStation/{station_id}", {})
+    def attach_station_to_user(self, user_id: int, station_id: int) -> Response:
+        return self.post(path=f"user/{user_id}/attachStation/{station_id}", json={})
