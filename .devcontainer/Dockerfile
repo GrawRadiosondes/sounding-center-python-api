@@ -13,14 +13,8 @@ ENV UV_PROJECT_ENVIRONMENT="/opt/.venv"
 ENV PATH="/opt/.venv/bin:$PATH"
 
 RUN apt update && apt install -y --no-install-recommends \
-    build-essential \
     git \
-    htop \
-    iproute2 \
-    netcat-openbsd \
-    nmap \
     openssh-client \
-    socat \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git config --global submodule.recurse true
