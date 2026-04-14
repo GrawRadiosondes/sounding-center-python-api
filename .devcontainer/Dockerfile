@@ -9,6 +9,9 @@ ENV PYTHONDONTWRITEBYTECODE="1"
 ENV PYTHONUNBUFFERED="1"
 ENV PYTHONPATH="src"
 
+ENV UV_PROJECT_ENVIRONMENT="/opt/.venv"
+ENV PATH="/opt/.venv/bin:$PATH"
+
 RUN apt update && apt install -y --no-install-recommends \
     build-essential \
     git \
@@ -24,18 +27,14 @@ RUN git config --global submodule.recurse true
 RUN git config --global pull.rebase true
 RUN git config --global rebase.autoStash true
 
-RUN mkdir -p -m 0600 ~/.ssh
-RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-WORKDIR /app
-RUN uv venv
-ENV PATH="/app/.venv/bin:$PATH"
-COPY pyproject.toml uv.lock* /app/
-RUN ls -lisha ~/.ssh
-RUN --mount=type=ssh uv sync
+#RUN mkdir -p -m 0600 ~/.ssh
+#RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 RUN uv tool update-shell
 RUN uv tool install bump-my-version
 RUN uv tool install ruff
+
+COPY pyproject.toml uv.lock* ./
+RUN --mount=type=ssh uv sync --no-install-project
 
 CMD ["sleep", "infinity"]
