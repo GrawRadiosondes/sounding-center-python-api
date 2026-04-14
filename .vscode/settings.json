@@ -33,12 +33,13 @@
   "python.defaultInterpreterPath": "/opt/.venv/bin/python",
   "python.terminal.activateEnvironment": true,
   "remote.autoForwardPorts": false,
+  "ruff.interpreter": ["/opt/.venv/bin/python"],
   "terminal.integrated.scrollback": 100000,
   "VsCodeTaskButtons.showCounter": false,
   "VsCodeTaskButtons.tasks": [
     {
-      "label": "$(play) test_api",
-      "task": "test_api",
+      "label": "$(play) pytest",
+      "task": "pytest",
     },
   ],
 }

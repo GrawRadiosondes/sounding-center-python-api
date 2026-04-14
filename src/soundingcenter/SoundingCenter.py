@@ -1,16 +1,22 @@
 from logging import info
 from typing import Any
+from urllib.parse import urlparse
 
 from requests import Response, get, post
 
 
 class Api:
     def __init__(
-        self, base_url: str, username: str, password: str, logging: bool = False
+        self,
+        base_url: str,
+        username: str = "",
+        password: str = "",
+        logging: bool = False,
     ) -> None:
         self.base_url: str = base_url
         self.auth: tuple[str, str] = (username, password)
         self.logging: bool = logging
+        self.verify_https: bool = urlparse(self.base_url).hostname != "localhost"
 
     def log(self, message: str | dict[str, Any]) -> None:
         if self.logging:
@@ -24,15 +30,20 @@ class Api:
             info(msg=response.status_code)
             info(msg=response.content)
 
-    def get(self, path: str) -> Response:
+    def get(self, path: str, authorized: bool = True) -> Response:
         self.log(message=f"GET {self.base_url}/{path}")
+
+        auth = None
+        if authorized:
+            auth = self.auth
 
         response: Response = get(
             url=f"{self.base_url}/{path}",
             headers={
                 "Accept": "application/json",
             },
-            auth=self.auth,
+            auth=auth,
+            verify=self.verify_https,
         )
 
         self.log_response(response=response)
@@ -49,13 +60,23 @@ class Api:
             headers={"Accept": "application/json", "Content-Type": "application/json"},
             auth=self.auth,
             json=json,
+            verify=self.verify_https,
         )
 
         self.log_response(response=response)
         return response
 
-    def user(self) -> Response:
+    def status(self) -> Response:
+        return self.get(path="status", authorized=False)
+
+    def user_self(self) -> Response:
         return self.get(path="user/self")
+
+    def user_self_stations(self) -> list[Any]:
+        return self.user_self().json()["data"]["stations"]
+
+    def user_self_first_station(self):
+        return self.user_self_stations()[0]
 
     def create_user(self, email: str, password: str, role: str, name: str) -> Response:
         return self.post(
@@ -86,6 +107,25 @@ class Api:
                 "latitude": latitude,
                 "longitude": longitude,
                 "altitude": altitude,
+            },
+        )
+
+    def create_flight(
+        self,
+        station_id: int,
+        status: str,
+        sonde_serial: str,
+        set_frequency: float,
+        sonde_firmware_version: str,
+    ) -> Response:
+        return self.post(
+            path="flight",
+            json={
+                "station_id": station_id,
+                "status": status,
+                "sonde_serial": sonde_serial,
+                "set_frequency": set_frequency,
+                "sonde_firmware_version": sonde_firmware_version,
             },
         )
 

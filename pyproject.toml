@@ -23,3 +23,8 @@ dependencies = ["requests~=2.32.5"]
 [project.urls]
 "Homepage" = "https://github.com/GrawRadiosondes/sounding-center-python-api"
 "Bug Tracker" = "https://github.com/GrawRadiosondes/sounding-center-python-api/issues"
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::urllib3.exceptions.InsecureRequestWarning"
+]

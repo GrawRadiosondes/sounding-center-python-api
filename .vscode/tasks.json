@@ -2,9 +2,9 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "test_api",
+      "label": "pytest",
       "type": "shell",
-      "command": "uv run src/soundingcenter/test_api.py",
+      "command": "pytest -vv --capture=no",
       "presentation": {
         "clear": true,
       },
