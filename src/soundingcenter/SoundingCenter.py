@@ -50,6 +50,7 @@ class Api:
         return response
 
     def post(self, path: str, json: Any) -> Response:
+        # TODO: fix for list in json instead of dict
         # sanitized_json: dict[str, Any] = {**json}
         # if "password" in sanitized_json:
         #    sanitized_json["password"] = "[REDACTED]"
