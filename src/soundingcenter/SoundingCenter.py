@@ -49,11 +49,11 @@ class Api:
         self.log_response(response=response)
         return response
 
-    def post(self, path: str, json: dict[str, Any]) -> Response:
-        sanitized_json: dict[str, Any] = {**json}
-        if "password" in sanitized_json:
-            sanitized_json["password"] = "[REDACTED]"
-        self.log(message=f"POST {self.base_url}/{path} {sanitized_json}")
+    def post(self, path: str, json: Any) -> Response:
+        # sanitized_json: dict[str, Any] = {**json}
+        # if "password" in sanitized_json:
+        #    sanitized_json["password"] = "[REDACTED]"
+        # self.log(message=f"POST {self.base_url}/{path} {sanitized_json}")
 
         response: Response = post(
             url=f"{self.base_url}/{path}",
