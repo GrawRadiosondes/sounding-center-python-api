@@ -130,5 +130,50 @@ class Api:
             },
         )
 
+    def create_measurement(
+        self,
+        flight_id: int,
+        time_after_launch: int,
+        utc_time: str,
+        pressure: float,
+        temperature: float,
+        humidity: float,
+        wind_speed: float,
+        wind_direction: float,
+        latitude: float,
+        longitude: float,
+        altitude: float,
+        vertical_speed: float,
+        geo_potential: float,
+        dew_point: float,
+        elevation: float,
+        azimuth: float,
+        distance: float,
+    ) -> Response:
+        return self.post(
+            path="measurement",
+            json=[
+                {
+                    "flight_id": flight_id,
+                    "time_after_launch": time_after_launch,
+                    "utc_time": utc_time,
+                    "pressure": pressure,
+                    "temperature": temperature,
+                    "humidity": humidity,
+                    "wind_speed": wind_speed,
+                    "wind_direction": wind_direction,
+                    "latitude": latitude,
+                    "longitude": longitude,
+                    "altitude": altitude,
+                    "vertical_speed": vertical_speed,
+                    "geo_potential": geo_potential,
+                    "dew_point": dew_point,
+                    "elevation": elevation,
+                    "azimuth": azimuth,
+                    "distance": distance,
+                },
+            ],
+        )
+
     def attach_station_to_user(self, user_id: int, station_id: int) -> Response:
         return self.post(path=f"user/{user_id}/attachStation/{station_id}", json={})
