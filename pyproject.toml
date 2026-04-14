@@ -10,8 +10,12 @@ readme = "README.md"
 requires-python = ">=3.14"
 license = { file = "LICENSE" }
 authors = [{ name = "Niklas Wildenburg", email = "niklas.wildenburg@graw.de" }]
-classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent"]
-dependencies = ["requests>=2.32.5,<2.34.0"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+dependencies = ["requests~=2.32.5"]
 
 [dependency-groups]
 "dev" = ["Faker~=40.8.0", "python-dotenv~=1.2.2"]
