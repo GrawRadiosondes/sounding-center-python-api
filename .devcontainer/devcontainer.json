@@ -3,8 +3,8 @@
   "build": {
     "dockerfile": "Dockerfile",
     "context": "..",
-    "options": ["--ssh", "default"],
   },
+  "updateContentCommand": "uv sync",
   "runArgs": ["--network=host", "--memory=8g", "--memory-swap=8g"],
   "mounts": [
     "type=bind,readonly,source=${localEnv:HOME}/.ssh,target=/root/.ssh",

@@ -28,7 +28,4 @@ RUN uv tool update-shell
 RUN uv tool install bump-my-version
 RUN uv tool install ruff
 
-COPY pyproject.toml uv.lock* ./
-RUN --mount=type=ssh uv sync --no-install-project
-
 CMD ["sleep", "infinity"]
