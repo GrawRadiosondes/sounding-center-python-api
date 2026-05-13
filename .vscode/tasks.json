@@ -4,7 +4,7 @@
     {
       "label": "pytest",
       "type": "shell",
-      "command": "pytest -vv --capture=no",
+      "command": "uv run pytest -vv --capture=no",
       "presentation": {
         "clear": true,
       },
