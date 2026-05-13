@@ -27,5 +27,6 @@ RUN git config --global rebase.autoStash true
 RUN uv tool update-shell
 RUN uv tool install bump-my-version
 RUN uv tool install ruff
+RUN uv tool install pytest
 
 CMD ["sleep", "infinity"]
